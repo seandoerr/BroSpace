@@ -23,41 +23,15 @@ public class Player {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	/****************Movements**************/
-	public void moveUp(int move) { //dont hardcode variable, create
-		yLoc += dy;//pixels
-	}
-	
-	public void moveDown(int move) {
-		yLoc += dy;//pixels
-	}
-	
-	public void moveLeft(int move) {
-		xLoc += dx;//pixels
-	}
-	
-	public void moveRight(int move) {
-		xLoc += dx;//pixels
+	public void move() {
+		
+		xLoc += dx;
+		yLoc += dy;
 	}
 	
 	public void keyPressed(KeyEvent e) {
-		
+		System.out.println("here");
 		int key = e.getKeyCode();
 		
 		if(key == KeyEvent.VK_LEFT) {
@@ -69,16 +43,16 @@ public class Player {
 		}
 
 		if(key == KeyEvent.VK_UP) {
-			dy=2;
+			dy= 2;
 		}
 		
 		if(key == KeyEvent.VK_DOWN) {
-			dy=-2;
+			dy= -2;
 		}
 	}
 	
 	
-public void keyReleased(KeyEvent e) {
+	public void keyReleased(KeyEvent e) {
 		
 		int key = e.getKeyCode();
 		
@@ -99,13 +73,45 @@ public void keyReleased(KeyEvent e) {
 		}
 	}
 
-public void paint(Graphics g) {
-		System.out.println(xLoc);
-		System.out.println(yLoc);
-		System.out.println(xLoc+size);
-		System.out.println(yLoc+size);
-		g.drawRect(xLoc, yLoc, xLoc+size, yLoc+size);
+	public Image getImage() {
+		return still;
 	}
+
+
+	public int getxLoc() {
+		return xLoc;
+	}
+
+
+	public int getyLoc() {
+		return yLoc;
+	}
+
+
+	public int getSize() {
+		return size;
+	}
+
+
+	public int getLives() {
+		return lives;
+	}
+
+
+	public int getDx() {
+		return dx;
+	}
+
+
+	public int getDy() {
+		return dy;
+	}
+
+
+	public Image getStill() {
+		return still;
+	}
+
 	
 
 }

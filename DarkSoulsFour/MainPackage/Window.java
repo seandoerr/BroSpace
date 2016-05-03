@@ -9,20 +9,31 @@ import javax.swing.JFrame;
 	import java.awt.event.*;
 	import java.util.ArrayList;
 
-	public class Window extends JFrame 
+	public class Window //extends JFrame 
 	{
-		private final int WINDOW_WIDTH = 600;
-		private final int WINDOW_HEIGHT = 400;
+		private final int WINDOW_WIDTH = 1200;
+		private final int WINDOW_HEIGHT = 750;
 
-		Player one = new Player(10,10);
-
-
-		public Window () {
-			super("game");
+		public Window () 
+		{
+			JFrame frame = new JFrame();
+			frame.add(new Game());
+			frame.setTitle("Gaben pls");
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+			frame.setVisible(true);
+			frame.setLocationRelativeTo(null);
+			
+			/*super("game");
 			setVisible(true);
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-			setResizable(true);
+			setResizable(true);*/
+		}
+		
+		public static void main(String[] args)
+		{
+			new Window();
 		}
 	
 	

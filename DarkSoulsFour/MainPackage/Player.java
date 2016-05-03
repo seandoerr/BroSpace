@@ -1,6 +1,5 @@
 package MainPackage;
 
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 
@@ -8,110 +7,132 @@ import javax.swing.ImageIcon;
 
 public class Player {
 	
-	int xLoc, yLoc, size;//first
-	int lives;//second
+	int xLoc, yLoc;//first
+	//int lives;//second
 	int dx, dy;
 	Image still;
 	
-	public Player(int x, int y) {
+	public Player() 
+	{
 		
-		xLoc = x;
-		yLoc = y;
-		ImageIcon i = new ImageIcon("/Users/OG/Desktop/circle.png");
+		xLoc = 110;
+		yLoc = 200;
+		ImageIcon i = new ImageIcon("/Users/seandoerr/Desktop/sprite2_0.png");
 		still = i.getImage();
 		
 	}
 	
-	
-	/****************Movements**************/
-	public void move() {
+	public void move()
+	{
 		
-		xLoc += dx;
+			xLoc += dx;
+		
 		yLoc += dy;
 	}
 	
-	public void keyPressed(KeyEvent e) {
-		System.out.println("here");
-		int key = e.getKeyCode();
-		
-		if(key == KeyEvent.VK_LEFT) {
-			dx = -2;
-		}
-		
-		if(key == KeyEvent.VK_RIGHT) {
-			dx = 2;
-		}
-
-		if(key == KeyEvent.VK_UP) {
-			dy= 2;
-		}
-		
-		if(key == KeyEvent.VK_DOWN) {
-			dy= -2;
-		}
+	public int getX()
+	{
+		return xLoc;
 	}
 	
-	
-	public void keyReleased(KeyEvent e) {
-		
-		int key = e.getKeyCode();
-		
-		if(key == KeyEvent.VK_LEFT) {
-			dx=0;
-		}
-		
-		if(key == KeyEvent.VK_RIGHT) {
-			dx=0;
-		}
+	public int getY()
+	{
+		return yLoc;
+	}
 
-		if(key == KeyEvent.VK_UP) {
-			dy=0;
-		}
-		
-		if(key == KeyEvent.VK_DOWN) {
-			dy=0;
-		}
+	public int getDx() {
+		return dx;
+	}
+
+	public void setDx(int dx) {
+		this.dx = dx;
+	}
+
+	public int getDy() {
+		return dy;
+	}
+
+	public void setDy(int dy) {
+		this.dy = dy;
 	}
 
 	public Image getImage() {
 		return still;
 	}
 
-
-	public int getxLoc() {
-		return xLoc;
+	public void setStill(Image still) {
+		this.still = still;
 	}
-
-
-	public int getyLoc() {
-		return yLoc;
+	
+	public void keyPressed(KeyEvent e)
+	{
+		int key = e.getKeyCode();
+		if(key == KeyEvent.VK_LEFT);
+		{
+			if(xLoc > 0)
+			{	
+				dx = -2;
+				dy = 0;
+			}
+		}
+		if(key == KeyEvent.VK_DOWN)
+		{
+			if(yLoc < 400) //TODO: Create constant for window height
+			{	
+				dy = 2;
+				dx = 0;
+			}
+		}
+		if(key == KeyEvent.VK_UP)
+		{
+			if(yLoc > 0)
+			{
+				dy = -2;
+				dx = 0;
+			}
+		}
+		
+		if(key == KeyEvent.VK_RIGHT)
+		{
+			if((xLoc+32) < 600) //TODO: create constant for window length
+			{	
+				dx = 2;
+				dy = 0;
+			}
+			else
+			{
+				dx = 0;
+			}
+		}
+		
 	}
-
-
-	public int getSize() {
-		return size;
+	
+	public void keyReleased(KeyEvent e)
+	{
+		int key = e.getKeyCode();
+		if(key == KeyEvent.VK_LEFT);
+		{
+			
+				
+			dx = 0;
+				
+		}
+		
+		if(key == KeyEvent.VK_RIGHT)
+		{
+			dx = 0;
+		}
+		
+		if(key == KeyEvent.VK_DOWN)
+		{
+			dy = 0;
+		}
+		if(key == KeyEvent.VK_UP)
+		{
+			dy = 0;
+		}
+		
 	}
-
-
-	public int getLives() {
-		return lives;
-	}
-
-
-	public int getDx() {
-		return dx;
-	}
-
-
-	public int getDy() {
-		return dy;
-	}
-
-
-	public Image getStill() {
-		return still;
-	}
-
 	
 
 }

@@ -5,7 +5,11 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 
-public class Player {
+public class Player 
+{
+	
+	private final int WINDOW_WIDTH = 600;
+	private final int WINDOW_HEIGHT = 400;
 	
 	int xLoc, yLoc;//first
 	//int lives;//second
@@ -24,10 +28,29 @@ public class Player {
 	
 	public void move()
 	{
-		
-			xLoc += dx;
-		
+		xLoc += dx;
 		yLoc += dy;
+		checkBoundaries();
+	}
+	
+	public void checkBoundaries()
+	{
+		if(xLoc < 0)
+		{
+			xLoc = 0;
+		}
+		if(xLoc > WINDOW_WIDTH)
+		{
+			xLoc = WINDOW_WIDTH;
+		}
+		if(yLoc < 0)
+		{
+			yLoc = 0;
+		}
+		if(yLoc > WINDOW_HEIGHT)
+		{
+			yLoc = WINDOW_HEIGHT;
+		}
 	}
 	
 	public int getX()
@@ -69,40 +92,24 @@ public class Player {
 		int key = e.getKeyCode();
 		if(key == KeyEvent.VK_LEFT);
 		{
-			if(xLoc > 0)
-			{	
 				dx = -2;
 				dy = 0;
-			}
 		}
 		if(key == KeyEvent.VK_DOWN)
 		{
-			if(yLoc < 400) //TODO: Create constant for window height
-			{	
 				dy = 2;
 				dx = 0;
-			}
 		}
 		if(key == KeyEvent.VK_UP)
 		{
-			if(yLoc > 0)
-			{
 				dy = -2;
 				dx = 0;
-			}
 		}
 		
 		if(key == KeyEvent.VK_RIGHT)
-		{
-			if((xLoc+32) < 600) //TODO: create constant for window length
-			{	
+		{	
 				dx = 2;
 				dy = 0;
-			}
-			else
-			{
-				dx = 0;
-			}
 		}
 		
 	}

@@ -11,8 +11,8 @@ import javax.swing.JFrame;
 
 	public class Window //extends JFrame 
 	{
-		private final int WINDOW_WIDTH = 1200;
-		private final int WINDOW_HEIGHT = 750;
+		private final int WINDOW_WIDTH = 637;
+		private final int WINDOW_HEIGHT = 455;
 
 		public Window () 
 		{
@@ -23,6 +23,7 @@ import javax.swing.JFrame;
 			frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 			frame.setVisible(true);
 			frame.setLocationRelativeTo(null);
+			frame.setResizable(false);
 			
 			/*super("game");
 			setVisible(true);

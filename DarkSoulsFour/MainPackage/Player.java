@@ -2,6 +2,7 @@ package MainPackage;
 
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
@@ -16,6 +17,8 @@ public class Player
 	int dx, dy;
 	Image still;
 	
+	static ArrayList<Projectile> projectiles;
+	
 	public Player() 
 	{
 		
@@ -23,7 +26,13 @@ public class Player
 		yLoc = 200;
 		ImageIcon i = new ImageIcon("/Users/seandoerr/Desktop/sprite2_0.png");
 		still = i.getImage();
-		
+		projectiles = new ArrayList<Projectile>();
+	}
+	
+	public void shoot()
+	{
+		Projectile p = new Projectile(xLoc, yLoc);
+		projectiles.add(p);
 	}
 	
 	public void move()
@@ -53,6 +62,11 @@ public class Player
 		}
 	}
 	
+	public static ArrayList<Projectile> getProjectiles()
+	{
+		return projectiles;
+	}
+	
 	public int getX()
 	{
 		return xLoc;
@@ -63,33 +77,45 @@ public class Player
 		return yLoc;
 	}
 
-	public int getDx() {
+	public int getDx() 
+	{
 		return dx;
 	}
 
-	public void setDx(int dx) {
+	public void setDx(int dx) 
+	{
 		this.dx = dx;
 	}
 
-	public int getDy() {
+	public int getDy() 
+	{
 		return dy;
 	}
 
-	public void setDy(int dy) {
+	public void setDy(int dy)
+	{
 		this.dy = dy;
 	}
 
-	public Image getImage() {
+	public Image getImage() 
+	{
 		return still;
 	}
 
-	public void setStill(Image still) {
+	public void setStill(Image still) 
+	{
 		this.still = still;
 	}
 	
 	public void keyPressed(KeyEvent e)
 	{
 		int key = e.getKeyCode();
+		
+		if(key == KeyEvent.VK_SPACE)
+		{
+			shoot();
+		}
+		
 		if(key == KeyEvent.VK_LEFT);
 		{
 				dx = -2;
@@ -110,6 +136,7 @@ public class Player
 		{	
 				dx = 2;
 				dy = 0;
+
 		}
 		
 	}
@@ -119,10 +146,7 @@ public class Player
 		int key = e.getKeyCode();
 		if(key == KeyEvent.VK_LEFT);
 		{
-			
-				
-			dx = 0;
-				
+			dx = 0;		
 		}
 		
 		if(key == KeyEvent.VK_RIGHT)

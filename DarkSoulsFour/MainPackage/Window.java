@@ -2,13 +2,6 @@ package MainPackage;
 
 import javax.swing.JFrame;
 
-	import java.awt.*;
-
-	import javax.swing.*;
-
-	import java.awt.event.*;
-	import java.util.ArrayList;
-
 	public class Window //extends JFrame 
 	{
 		private final int WINDOW_WIDTH = 637;

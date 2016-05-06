@@ -18,11 +18,6 @@ import javax.swing.JFrame;
 			frame.setLocationRelativeTo(null);
 			frame.setResizable(false);
 			
-			/*super("game");
-			setVisible(true);
-			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-			setResizable(true);*/
 		}
 		
 		public static void main(String[] args)

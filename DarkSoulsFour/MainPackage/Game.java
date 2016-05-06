@@ -1,5 +1,7 @@
 package MainPackage;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -18,8 +20,8 @@ public class Game extends JPanel implements ActionListener
 	
 	Player person;
 	Timer time;
-	public Image img;
-	
+	public Image img, img2;
+		
 	public Game() 
 	{
 		person = new Player();
@@ -29,6 +31,8 @@ public class Game extends JPanel implements ActionListener
 		img = i.getImage(); //for background
 		time = new Timer(5, this);
 		time.start();
+		ImageIcon fire = new ImageIcon("/Users/seandoerr/Desktop/fireball2.png");
+		img2 = fire.getImage();
 	}
 	
 	public void actionPerformed(ActionEvent e) 
@@ -37,7 +41,7 @@ public class Game extends JPanel implements ActionListener
 		for(int i = 0; i < projectiles.size(); i++)
 		{
 			Projectile p = (Projectile) projectiles.get(i);
-			if(p.isVisible())
+			if(p.isVisible() == true)
 			{
 				p.move();
 			}
@@ -63,8 +67,9 @@ public class Game extends JPanel implements ActionListener
 		for(int i = 0; i < projectiles.size(); i++)
 		{
 			Projectile p = (Projectile) projectiles.get(i);
-			g2d.drawImage(p.getProjectile(), p.getX(), p.getY(), null);
+			g2d.drawImage(img2, p.getX(), p.getY(), null);
 		}
+		
 	}
 	
 	private class AL extends KeyAdapter

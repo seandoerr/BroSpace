@@ -11,7 +11,7 @@ public class Projectile
 	boolean visible;
 	public Projectile(int x, int y) 
 	{
-		ImageIcon newProjectile = new ImageIcon("/Users/seandoerr/Desktop/fireball.png");
+		ImageIcon newProjectile = new ImageIcon("/Users/seandoerr/Desktop/fireball2.png ");
 		projectile = newProjectile.getImage();
 		this.x = x;
 		this.y = y;
@@ -22,7 +22,7 @@ public class Projectile
 	public void move() 
 	{
 		x += 3;
-		if(x > 600)
+		if(x > 637)
 		{
 			visible = false;
 		}

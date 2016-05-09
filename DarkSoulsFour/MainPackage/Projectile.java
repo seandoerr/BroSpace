@@ -11,7 +11,7 @@ public class Projectile
 	boolean visible;
 	public Projectile(int x, int y) 
 	{
-		ImageIcon newProjectile = new ImageIcon("/Users/seandoerr/Desktop/fireball2.png ");
+		ImageIcon newProjectile = new ImageIcon("fireball2.png ");
 		projectile = newProjectile.getImage();
 		this.x = x;
 		this.y = y;

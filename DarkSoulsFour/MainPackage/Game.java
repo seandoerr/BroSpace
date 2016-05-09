@@ -29,11 +29,11 @@ public class Game extends JPanel implements ActionListener
 		person = new Player();
 		addKeyListener(new AL());
 		setFocusable(true);
-		ImageIcon i = new ImageIcon("/Users/seandoerr/Desktop/SpaceBG.gif");//background
+		ImageIcon i = new ImageIcon("SpaceBG.gif");//background
 		img = i.getImage(); //for background
 		time = new Timer(5, this);
 		time.start();
-		ImageIcon fire = new ImageIcon("/Users/seandoerr/Desktop/fireball2.png");
+		ImageIcon fire = new ImageIcon("fireball2.png");
 		img2 = fire.getImage();
 	}
 	

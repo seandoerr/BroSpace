@@ -26,7 +26,7 @@ public class Player
 		yLoc = 200;
 		nx2 = 590;
 		nx = 0;
-		ImageIcon i = new ImageIcon("/Users/seandoerr/Desktop/sprite2_0.png");
+		ImageIcon i = new ImageIcon("sprite2_0.png");
 		still = i.getImage();
 		projectiles = new ArrayList<Projectile>();
 	}

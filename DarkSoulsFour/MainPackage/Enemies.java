@@ -47,7 +47,7 @@ size = ENEMY_SIZE; //the grid of the enemy
 x =600 -size; 
 
 
-img = new ImageIcon("/Users/seandoerr/Desktop/enemy.png");
+img = new ImageIcon("enemy.png");
 
 
 theHomie = img.getImage();

@@ -21,13 +21,15 @@ public class Game extends JPanel implements ActionListener
 	Player person;
 	Timer time;
 	public Image img, img2;
+	Enemies enemy;
 		
 	public Game() 
 	{
+		enemy = new Enemies(2);
 		person = new Player();
 		addKeyListener(new AL());
 		setFocusable(true);
-		ImageIcon i = new ImageIcon("/Users/seandoerr/Desktop/space.png");//background
+		ImageIcon i = new ImageIcon("/Users/seandoerr/Desktop/SpaceBG.gif");//background
 		img = i.getImage(); //for background
 		time = new Timer(5, this);
 		time.start();
@@ -51,7 +53,7 @@ public class Game extends JPanel implements ActionListener
 			}
 		}
 
-		
+		enemy.fire();
 		person.move();
 		repaint();
 	}
@@ -60,8 +62,25 @@ public class Game extends JPanel implements ActionListener
 	{
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.drawImage(img, 0, 0, null);
-		g2d.drawImage(person.getImage(), person.getX() , person.getY() ,null);
+		
+		if((person.getX() - 110) % 1280 == 0) 
+		{
+			person.nx = 0;
+		}
+		if((person.getX() - 750) % 1280 == 0)
+		{
+			person.nx2 = 0;
+		}
+		
+		g2d.drawImage(img,622-person.nx2, 0, null);
+		System.out.println();
+		if(person.getX() >= 110)
+		{
+			g2d.drawImage(img,622-person.nx, 0, null);
+		}
+		g2d.drawImage(person.getImage(), 110 , person.getY() ,null);
+		
+		
 		
 		ArrayList<Projectile> projectiles = Player.getProjectiles();
 		for(int i = 0; i < projectiles.size(); i++)
@@ -70,6 +89,7 @@ public class Game extends JPanel implements ActionListener
 			g2d.drawImage(img2, p.getX(), p.getY(), null);
 		}
 		
+		g2d.drawImage(enemy.getImage(), enemy.getX(), enemy.getY(), null);
 	}
 	
 	private class AL extends KeyAdapter

@@ -14,7 +14,7 @@ public class Player
 	
 	int xLoc, yLoc;//first
 	//int lives;//second
-	int dx, dy;
+	int dx, dy, nx, nx2;
 	Image still;
 	
 	static ArrayList<Projectile> projectiles;
@@ -24,6 +24,8 @@ public class Player
 		
 		xLoc = 110;
 		yLoc = 200;
+		nx2 = 590;
+		nx = 0;
 		ImageIcon i = new ImageIcon("/Users/seandoerr/Desktop/sprite2_0.png");
 		still = i.getImage();
 		projectiles = new ArrayList<Projectile>();
@@ -39,6 +41,8 @@ public class Player
 	{
 		xLoc += dx;
 		yLoc += dy;
+		nx2 += dx;
+		nx += dx;
 		checkBoundaries();
 	}
 	

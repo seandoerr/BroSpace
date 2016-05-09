@@ -22,10 +22,23 @@ public class Game extends JPanel implements ActionListener
 	Timer time;
 	public Image img, img2;
 	Enemies enemy;
+	ArrayList<Enemies> level = new ArrayList<Enemies>();
+	
+	int iterator, b;
 		
 	public Game() 
 	{
 		enemy = new Enemies(2);
+		
+		
+		// current level
+		level.add(new Enemies(2));
+		level.add(new Enemies(1));
+		level.add(new Enemies(0));
+		level.add(new Enemies(2));
+		level.add(new Enemies(1));
+		level.add(new Enemies(2));
+		
 		person = new Player();
 		addKeyListener(new AL());
 		setFocusable(true);
@@ -35,10 +48,16 @@ public class Game extends JPanel implements ActionListener
 		time.start();
 		ImageIcon fire = new ImageIcon("fireball2.png");
 		img2 = fire.getImage();
+		 iterator  = 0;
+		 b = 0;
+		
+		
+		
 	}
 	
 	public void actionPerformed(ActionEvent e) 
 	{
+		
 		ArrayList<Projectile> projectiles = Player.getProjectiles();
 		for(int i = 0; i < projectiles.size(); i++)
 		{
@@ -52,9 +71,9 @@ public class Game extends JPanel implements ActionListener
 				projectiles.remove(i);
 			}
 		}
-
-		enemy.fire();
+		
 		person.move();
+		
 		repaint();
 	}
 	
@@ -96,7 +115,38 @@ public class Game extends JPanel implements ActionListener
 			}*/
 		}
 		
-		g2d.drawImage(enemy.getImage(), enemy.getX(), enemy.getY(), null);
+		if(iterator % 500 == 0) {
+					
+					System.out.println("here");
+					
+					if(b < 6) {
+						System.out.println("prease");
+						b++;
+					//	g2d.drawImage(level.get(b).getImage(), level.get(b).getX(), level.get(b).getY(), null);
+					}
+		}
+		
+		iterator++;
+		
+		if( iterator > 500)
+			level.get(0).fire();
+		if( iterator > 700)
+			level.get(1).fire();
+		if( iterator > 300)
+			level.get(2).fire();
+		if( iterator > 400)
+			level.get(3).fire();
+		if( iterator > 500)
+			level.get(4).fire();
+		if( iterator > 600)
+			level.get(5).fire();
+		
+		for( int i=0; i < 6 ; i++) {
+			g2d.drawImage(level.get(i).getImage(), level.get(i).getX(), level.get(i).getY(), null);
+		}
+		
+		
+		
 	}
 	
 	private class AL extends KeyAdapter

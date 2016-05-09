@@ -6,133 +6,97 @@ import javax.swing.ImageIcon;
 
 import javax.swing.Timer;
 
+public class Enemies { // 600 width 400 height
 
+	final double ENEMY_VELOCITY = -1;
 
-public class Enemies {	//600 width  400 height
+	final int ENEMY_SIZE = 50;
 
-final double ENEMY_VELOCITY = -1;
+	final int DELAY = 1000;
 
-final int ENEMY_SIZE = 50;
+	int x, y, size;
 
+	ImageIcon img;
 
+	Image theHomie;
 
-final int DELAY = 1000;
+	// pre:1-4
 
+	public Enemies(int locationStart) {
 
-int x, y, size ;
+		if (locationStart > 4 || locationStart < 0) {
 
-ImageIcon img;
+			locationStart = -4;
 
-Image theHomie;
+		}
 
+		y = (locationStart * 100) - size;// going to move to hundreds pixel
+											// location
 
-//pre:1-4
+		size = ENEMY_SIZE; // the grid of the enemy
 
-public Enemies(int locationStart) {
+		x = 600 - size;
 
+		img = new ImageIcon("enemy.png");
 
-if( locationStart > 4 || locationStart < 0) {
+		theHomie = img.getImage();
 
-locationStart = -4;
+	}
 
-}
+	// fires the enemy to the left of the screen from the right
 
+	public void fire() {
 
-y = (locationStart * 100) - size;// going to move to hundreds pixel location
+		x += ENEMY_VELOCITY;
 
+	}
 
-size = ENEMY_SIZE; //the grid of the enemy
+	public int getX() {
 
+		return x;
 
-x =600 -size; 
+	}
 
+	public void setX(int x) {
 
-img = new ImageIcon("enemy.png");
+		this.x = x;
 
+	}
 
-theHomie = img.getImage();
+	public int getY() {
 
+		return y;
 
-}
+	}
 
+	public void setY(int y) {
 
+		this.y = y;
 
-//fires the enemy to the left of the screen from the right
+	}
 
-public void fire() {
+	public int getSize() {
 
+		return size;
 
+	}
 
-x += ENEMY_VELOCITY;
+	public void setSize(int size) {
 
+		this.size = size;
 
-}
+	}
 
+	public Image getImage() {
 
+		return this.theHomie;
 
+	}
 
-public int getX() {
+	public void setImg(ImageIcon img) {
 
-return x;
+		this.img = img;
 
-}
-
-
-
-public void setX(int x) {
-
-this.x = x;
-
-}
-
-
-
-public int getY() {
-
-return y;
-
-}
-
-
-
-public void setY(int y) {
-
-this.y = y;
-
-}
-
-
-
-public int getSize() {
-
-return size;
-
-}
-
-
-public void setSize(int size) {
-
-this.size = size;
-
-}
-
-
-public Image getImage() {
-
-return this.theHomie;
-
-}
-
-
-
-public void setImg(ImageIcon img) {
-
-this.img = img;
-
-}
-
-
-
-
+	}
 
 }

@@ -22,10 +22,10 @@ public class Projectile
 	public void move() 
 	{
 		x += 3;
-		if(x > 637)
+		/*if(x > 637)
 		{
 			visible = false;
-		}
+		}*/
 	}
 
 	public int getX() 

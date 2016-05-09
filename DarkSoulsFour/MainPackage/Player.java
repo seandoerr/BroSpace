@@ -43,7 +43,7 @@ public class Player
 		yLoc += dy;
 		nx2 += dx;
 		nx += dx;
-		checkBoundaries();
+		//checkBoundaries();
 	}
 	
 	public void checkBoundaries()

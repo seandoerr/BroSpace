@@ -63,6 +63,7 @@ public class Game extends JPanel implements ActionListener
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
 		
+		int temp = person.nx;
 		if((person.getX() - 110) % 1280 == 0) 
 		{
 			person.nx = 0;
@@ -73,12 +74,13 @@ public class Game extends JPanel implements ActionListener
 		}
 		
 		g2d.drawImage(img,622-person.nx2, 0, null);
-		System.out.println();
+		//System.out.println(person.getX());
+		
 		if(person.getX() >= 110)
 		{
 			g2d.drawImage(img,622-person.nx, 0, null);
 		}
-		g2d.drawImage(person.getImage(), 110 , person.getY() ,null);
+		g2d.drawImage(person.getImage(), 110, person.getY() ,null);
 		
 		
 		
@@ -86,7 +88,13 @@ public class Game extends JPanel implements ActionListener
 		for(int i = 0; i < projectiles.size(); i++)
 		{
 			Projectile p = (Projectile) projectiles.get(i);
-			g2d.drawImage(img2, p.getX(), p.getY(), null);
+			g2d.drawImage(img2, p.getX() - person.nx, p.getY(), null);
+			
+			if(i == 0)
+			{
+				System.out.println("Projectile: " + (p.getX() - person.nx));
+				System.out.println("Person: " + person.getX());
+			}
 		}
 		
 		g2d.drawImage(enemy.getImage(), enemy.getX(), enemy.getY(), null);

@@ -1,6 +1,7 @@
 package MainPackage;
 
 import java.awt.Image;
+import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 
@@ -56,6 +57,10 @@ public class Projectile
 	public void setProjectile(Image projectile) 
 	{
 		this.projectile = projectile;
+	}
+	
+	public Rectangle getBounds() {
+		return new Rectangle(x-10, y-10, 10, 10);
 	}
 
 	public boolean isVisible() 

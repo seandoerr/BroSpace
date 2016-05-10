@@ -1,6 +1,7 @@
 package MainPackage;
 
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
@@ -167,6 +168,10 @@ public class Player
 			dy = 0;
 		}
 		
+	}
+	
+	public Rectangle getBounds() {
+		return new Rectangle(xLoc, yLoc, 32, 32);
 	}
 	
 

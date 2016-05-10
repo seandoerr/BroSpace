@@ -1,6 +1,7 @@
 package MainPackage;
 
 import java.awt.Image;
+import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 
@@ -19,8 +20,10 @@ public class Enemies { // 600 width 400 height
 	ImageIcon img;
 
 	Image theHomie;
+	
+	boolean alive = true;
 
-	// pre:1-4
+	Rectangle border;
 
 	public Enemies(int locationStart) {
 
@@ -35,7 +38,7 @@ public class Enemies { // 600 width 400 height
 
 		size = ENEMY_SIZE; // the grid of the enemy
 
-		x = 600 - size;
+		x = 800 - size;
 
 		img = new ImageIcon("enemy.png");
 
@@ -97,6 +100,18 @@ public class Enemies { // 600 width 400 height
 
 		this.img = img;
 
+	}
+	
+	public Rectangle getBounds() {
+		return new Rectangle(x-10, y-15, 25, 25);
+	}
+	
+	public boolean getAlive() {
+		return alive;
+	}
+	
+	public void setAlive(boolean isAlive) {
+		alive = isAlive;
 	}
 
 }

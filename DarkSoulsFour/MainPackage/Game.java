@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -58,6 +59,8 @@ public class Game extends JPanel implements ActionListener
 	public void actionPerformed(ActionEvent e) 
 	{
 		
+		hitDetection();
+		
 		ArrayList<Projectile> projectiles = Player.getProjectiles();
 		for(int i = 0; i < projectiles.size(); i++)
 		{
@@ -81,6 +84,8 @@ public class Game extends JPanel implements ActionListener
 	{
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
+		
+		hitDetection();
 		
 		/*if((person.getX() - 110) % 1280 == 0) 
 		{
@@ -128,24 +133,57 @@ public class Game extends JPanel implements ActionListener
 		
 		iterator++;
 		
-		if( iterator > 500)
+		if( iterator > 500) {	
 			level.get(0).fire();
-		if( iterator > 700)
+		}
+		if( iterator > 700){
 			level.get(1).fire();
-		if( iterator > 300)
+		}
+		if( iterator > 300) {
 			level.get(2).fire();
-		if( iterator > 400)
+		}
+		if( iterator > 400) {
 			level.get(3).fire();
-		if( iterator > 500)
+		}
+		if( iterator > 500) {
 			level.get(4).fire();
-		if( iterator > 600)
+		}
+		
+		if( iterator > 600) {
 			level.get(5).fire();
+		}
 		
 		for( int i=0; i < 6 ; i++) {
-			g2d.drawImage(level.get(i).getImage(), level.get(i).getX(), level.get(i).getY(), null);
+			if(level.get(i).getAlive()==true) {
+				g2d.drawImage(level.get(i).getImage(), level.get(i).getX(), level.get(i).getY(), null);
+			}
 		}
 		
 		
+	}
+	
+	public void hitDetection() {
+		Rectangle poop;
+		Rectangle playerPoop = person.getBounds();
+		ArrayList projectiles = Player.getProjectiles();
+		for(int i = 0; i < projectiles.size(); i++)
+		{
+			Projectile p = (Projectile) projectiles.get(i);
+			Rectangle a = p.getBounds();
+			
+			for( int x = 0 ;x < level.size(); x++) {
+				poop = level.get(x).getBounds();
+				if(a.intersects(poop)&& level.get(x).getAlive()) {
+					System.out.println("PPPPPOOOOPPPP");
+					level.get(x).setAlive(false);
+					p.setVisible(false);				
+				}
+				if(poop .intersects(playerPoop)) {
+					System.out.println("POOOOOPPPPPPEEEEDDD ON!!!!!!!");
+				}
+			}
+						
+		}
 		
 	}
 	

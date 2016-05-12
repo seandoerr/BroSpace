@@ -17,6 +17,7 @@ public class Player
 	//int lives;//second
 	int dx, dy, nx, nx2;
 	Image still;
+	boolean ded = false;
 	
 	static ArrayList<Projectile> projectiles;
 	
@@ -173,6 +174,15 @@ public class Player
 	public Rectangle getBounds() {
 		return new Rectangle(xLoc, yLoc, 32, 32);
 	}
+	
+	public void setDed(boolean bool) {
+		ded = bool;
+	}
+	
+	public boolean getDed() {
+		return ded;
+	}
+	
 	
 
 }

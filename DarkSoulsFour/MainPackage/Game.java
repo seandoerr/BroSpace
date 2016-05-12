@@ -1,7 +1,5 @@
 package MainPackage;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -11,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -19,11 +19,15 @@ import javax.swing.Timer;
 public class Game extends JPanel implements ActionListener  
 {
 	
+	
+	
 	Player person;
 	Timer time;
 	public Image img, img2;
 	Enemies enemy;
 	ArrayList<Enemies> level = new ArrayList<Enemies>();
+	
+	Queue<Enemies> level2 = new LinkedList<Enemies>();
 	
 	int iterator, b;
 		
@@ -52,8 +56,6 @@ public class Game extends JPanel implements ActionListener
 		 iterator  = 0;
 		 b = 0;
 		
-		
-		
 	}
 	
 	public void actionPerformed(ActionEvent e) 
@@ -74,9 +76,7 @@ public class Game extends JPanel implements ActionListener
 				projectiles.remove(i);
 			}
 		}
-		
 		person.move();
-		
 		repaint();
 	}
 	
@@ -103,7 +103,10 @@ public class Game extends JPanel implements ActionListener
 		{
 			g2d.drawImage(img,622-person.nx, 0, null);
 		}*/
-		g2d.drawImage(person.getImage(), person.getX(), person.getY() ,null);
+		
+		if(!person.getDed()) {
+			g2d.drawImage(person.getImage(), person.getX(), person.getY() ,null);
+		}
 		
 		
 		
@@ -120,20 +123,10 @@ public class Game extends JPanel implements ActionListener
 			}*/
 		}
 		
-		if(iterator % 500 == 0) {
-					
-					System.out.println("here");
-					
-					if(b < 6) {
-						System.out.println("prease");
-						b++;
-					//	g2d.drawImage(level.get(b).getImage(), level.get(b).getX(), level.get(b).getY(), null);
-					}
-		}
 		
 		iterator++;
 		
-		if( iterator > 500) {	
+		if( iterator > 100) {	
 			level.get(0).fire();
 		}
 		if( iterator > 700){
@@ -157,32 +150,39 @@ public class Game extends JPanel implements ActionListener
 			if(level.get(i).getAlive()==true) {
 				g2d.drawImage(level.get(i).getImage(), level.get(i).getX(), level.get(i).getY(), null);
 			}
-		}
-		
-		
+		}		
 	}
 	
 	public void hitDetection() {
 		Rectangle poop;
-		Rectangle playerPoop = person.getBounds();
 		ArrayList projectiles = Player.getProjectiles();
+		Rectangle personBounds = person.getBounds();
+		
 		for(int i = 0; i < projectiles.size(); i++)
 		{
+			System.out.println("checking");
 			Projectile p = (Projectile) projectiles.get(i);
 			Rectangle a = p.getBounds();
 			
 			for( int x = 0 ;x < level.size(); x++) {
 				poop = level.get(x).getBounds();
+				
 				if(a.intersects(poop)&& level.get(x).getAlive()) {
-					System.out.println("PPPPPOOOOPPPP");
+					System.out.println("got em");
 					level.get(x).setAlive(false);
 					p.setVisible(false);				
 				}
-				if(poop .intersects(playerPoop)) {
-					System.out.println("POOOOOPPPPPPEEEEDDD ON!!!!!!!");
-				}
 			}
 						
+		}
+		
+		for ( int x = 0 ;x< level.size(); x++) {
+			Rectangle ship = level.get(x).getBounds(); 
+			if(ship.intersects(personBounds)&&level.get(x).getAlive()) {
+				System.out.println("DED");
+				person.setDed(true);
+			}
+			
 		}
 		
 	}

@@ -27,6 +27,9 @@ public class Game extends JPanel implements ActionListener
 	
 	Timer time;
 	
+	static int currentSize = 0 ;
+	static int endOfWave =0;
+	
 	public Image img, img2;
 	
 	Enemies enemy;
@@ -127,6 +130,7 @@ public class Game extends JPanel implements ActionListener
 	public void paint(Graphics g)
 	{
 		super.paint(g);
+		
 		Graphics2D g2d = (Graphics2D) g;
 		
 		hitDetection();
@@ -150,10 +154,12 @@ public class Game extends JPanel implements ActionListener
 			
 		}
 		
+		if(iterator==0) {
+			currentSize = levelSize.poll();//this will initialize the size of the wave
+			System.out.println(currentSize);
+		}
 		
 		iterator++;
-		
-		
 		
 		if( iterator > 100) {	
 			level.get(foe).fire();
@@ -174,28 +180,47 @@ public class Game extends JPanel implements ActionListener
 			level.get(foe+5).fire();
 		}
 		
-		if(iterator==1400) {
+		if( iterator>700 && currentSize>6) {
+			level.get(foe+6).fire();
+			endOfWave = 200;
+		}
+		
+		if( iterator>800 && currentSize>7) {//moving the eight enemy
 			
-			foe+=6;
+			level.get(foe+7).fire();
+			endOfWave = 400;
+		}
+		
+		if( iterator>900 && currentSize>8) {
+			level.get(foe+8).fire();
+			endOfWave = 600;
+		}
+		
+		if( iterator>1000 && currentSize>9) {
+			level.get(foe+9).fire();
+			endOfWave = 800;
+		}
+		
+		
+		//this will number will indicate the end of a wave
+		if(iterator==(1400+endOfWave)) {//need to change this iterator value, indicates the end of the wave
+			
+			foe+=currentSize;
 			iterator=0;
 			currentLevel++;
 			
-			if(currentLevel>3) {
-				//increment the number of enemies
-				//
-			}
-			
 			System.out.println("_____________________END OF LEVEL "+ currentLevel +"_____________________");
-			if(currentLevel==LAST_LEVEL) {
+			if(currentLevel==LAST_LEVEL) {//checks to see if the last level
 				endGame=true;
 			}
 		}
 		
+		//exits the game at the last wave
 		if(endGame) {
 			System.exit(100);
 		}
 		
-		for( int i=0; i < 6 ; i++) {
+		for( int i=0; i < currentSize ; i++) {//change to currentSize
 			if(level.get(foe+i).getAlive()==true) {
 				g2d.drawImage(level.get(i+foe).getImage(), level.get(i+foe).getX(), level.get(i+foe).getY(), null);
 			}
@@ -203,7 +228,7 @@ public class Game extends JPanel implements ActionListener
 	}
 	
 	public void hitDetection() {
-		Rectangle poop;
+		Rectangle aEnemy;
 		ArrayList projectiles = Player.getProjectiles();
 		Rectangle personBounds = person.getBounds();
 		
@@ -213,9 +238,10 @@ public class Game extends JPanel implements ActionListener
 			Projectile p = (Projectile) projectiles.get(i);
 			Rectangle a = p.getBounds();
 			
+			//checks to see the enemy intersects with projectile
 			for( int x = 0 ;x < level.size(); x++) {
-				poop = level.get(x).getBounds();
-				if(a.intersects(poop)&& level.get(x).getAlive()) {
+				aEnemy = level.get(x).getBounds();
+				if(a.intersects(aEnemy)&& level.get(x).getAlive()) {
 					score++;
 					System.out.println("got em");
 					level.get(x).setAlive(false);
@@ -224,6 +250,7 @@ public class Game extends JPanel implements ActionListener
 			}						
 		}
 		
+		//checks to see the enemy intersects with person
 		for ( int x = 0 ;x< level.size(); x++) {
 			Rectangle ship = level.get(x).getBounds(); 
 			if(ship.intersects(personBounds)&&level.get(x).getAlive()) {

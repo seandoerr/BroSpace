@@ -2,7 +2,7 @@ package MainPackage;
 
 import javax.swing.JFrame;
 
-	public class Window //extends JFrame 
+	public class Window 
 	{
 		private final int WINDOW_WIDTH = 637;
 		private final int WINDOW_HEIGHT = 455;

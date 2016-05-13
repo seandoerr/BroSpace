@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -19,6 +20,7 @@ import javax.swing.Timer;
 public class Game extends JPanel implements ActionListener  
 {
 	
+	final int LAST_LEVEL = 5;
 	
 	
 	Player person;
@@ -27,12 +29,18 @@ public class Game extends JPanel implements ActionListener
 	Enemies enemy;
 	ArrayList<Enemies> level = new ArrayList<Enemies>();
 	
+	int currentLevel =  0; 
+	
 	Queue<Enemies> level2 = new LinkedList<Enemies>();
 	
-	int iterator, b;
+	int iterator, b, foe,score;
+	
+	boolean endGame = false;
+	
 		
 	public Game() 
 	{
+		Random ran = new Random();
 		enemy = new Enemies(2);
 		
 		
@@ -43,6 +51,28 @@ public class Game extends JPanel implements ActionListener
 		level.add(new Enemies(2));
 		level.add(new Enemies(1));
 		level.add(new Enemies(2));
+		
+		//level two
+		level.add(new Enemies(2));
+		level.add(new Enemies(4));
+		level.add(new Enemies(3));
+		level.add(new Enemies(3));
+		level.add(new Enemies(1));
+		level.add(new Enemies(0));
+		
+		//level three
+		level.add(new Enemies(0));
+		level.add(new Enemies(4));
+		level.add(new Enemies(0));
+		level.add(new Enemies(4));
+		level.add(new Enemies(0));
+		level.add(new Enemies(4));
+		
+		for( int i = 0 ; i < LAST_LEVEL-3;i++ ) {
+			for(int x = 0; x < 6 ; x++) {
+				level.add(new Enemies(ran.nextInt(5)));
+			}
+		}
 		
 		person = new Player();
 		addKeyListener(new AL());
@@ -55,6 +85,7 @@ public class Game extends JPanel implements ActionListener
 		img2 = fire.getImage();
 		 iterator  = 0;
 		 b = 0;
+		 foe = 0;
 		
 	}
 	
@@ -127,30 +158,44 @@ public class Game extends JPanel implements ActionListener
 		iterator++;
 		
 		if( iterator > 100) {	
-			level.get(0).fire();
+			level.get(foe).fire();
 		}
-		if( iterator > 700){
-			level.get(1).fire();
+		if( iterator > 200){
+			level.get(foe+1).fire();
 		}
 		if( iterator > 300) {
-			level.get(2).fire();
+			level.get(foe+2).fire();
 		}
 		if( iterator > 400) {
-			level.get(3).fire();
+			level.get(foe+3).fire();
 		}
 		if( iterator > 500) {
-			level.get(4).fire();
+			level.get(foe+4).fire();
 		}
 		
 		if( iterator > 600) {
-			level.get(5).fire();
+			level.get(foe+5).fire();
+		}
+		
+		if(iterator==1400) {
+			foe+=6;
+			iterator=0;
+			currentLevel++;
+			System.out.println("_____________________END OF LEVEL "+ currentLevel +"_____________________");
+			if(currentLevel==LAST_LEVEL) {
+				endGame=true;
+			}
+		}
+		
+		if(endGame) {
+			System.exit(100);
 		}
 		
 		for( int i=0; i < 6 ; i++) {
-			if(level.get(i).getAlive()==true) {
-				g2d.drawImage(level.get(i).getImage(), level.get(i).getX(), level.get(i).getY(), null);
+			if(level.get(foe+i).getAlive()==true) {
+				g2d.drawImage(level.get(i+foe).getImage(), level.get(i+foe).getX(), level.get(i+foe).getY(), null);
 			}
-		}		
+		}	
 	}
 	
 	public void hitDetection() {
@@ -168,12 +213,12 @@ public class Game extends JPanel implements ActionListener
 				poop = level.get(x).getBounds();
 				
 				if(a.intersects(poop)&& level.get(x).getAlive()) {
+					score++;
 					System.out.println("got em");
 					level.get(x).setAlive(false);
 					p.setVisible(false);				
 				}
-			}
-						
+			}						
 		}
 		
 		for ( int x = 0 ;x< level.size(); x++) {
@@ -197,7 +242,5 @@ public class Game extends JPanel implements ActionListener
 		{
 			person.keyPressed(e);
 		}
-	}
-	
-	
+	}	
 }

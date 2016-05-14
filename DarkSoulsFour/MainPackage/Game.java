@@ -25,6 +25,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.UIManager;
+import javax.swing.plaf.ColorUIResource;
 
 public class Game extends JPanel implements ActionListener  
 {
@@ -53,6 +55,8 @@ public class Game extends JPanel implements ActionListener
 	
 	boolean endGame = false;
 	
+	ImageIcon play = new ImageIcon("title.png");
+	ImageIcon over = new ImageIcon("gameOver2.png");
 		
 	public Game() 
 	{
@@ -61,10 +65,12 @@ public class Game extends JPanel implements ActionListener
 		enemy = new Enemies(2);
 		levelSize = new LinkedList<Integer>();
 		
-		
-		//JOptionPane, set size, create background ( potentially make button the size of the optionPane and change the background of the background)
-//		JOptionPane gameOver = new JOptionPane("Game Over");
-//		gameOver.showMessageDialog(null, "You Lose");
+		UIManager UI = new UIManager();
+		UI.put("OptionPane.background", new ImageIcon("SpaceBG.gif"));
+		UI.put("Panel.background",Color.BLACK);
+
+		JOptionPane gameStart = new JOptionPane();
+		gameStart.showMessageDialog(null, "", "", JOptionPane.INFORMATION_MESSAGE,play);
 		
 		
 		//current level
@@ -234,14 +240,18 @@ public class Game extends JPanel implements ActionListener
 		}
 		
 		//exits the game at the last wave
-		if(endGame) {
+		if(endGame) 
+		{
 			time.stop();
+			UIManager UI = new UIManager();
+			UI.put("OptionPane.background", Color.DARK_GRAY);
+			UI.put("Panel.background",Color.DARK_GRAY);
 			JOptionPane gameOver = new JOptionPane("Game Over");
 			if(person.getDed()) {
-				gameOver.showMessageDialog(null, ("You Lose\nScore"+score+"\nWave"+currentLevel));
+				gameOver.showMessageDialog(null, ("You Lose!\nScore: "+score+"\nWave "+currentLevel),"", JOptionPane.INFORMATION_MESSAGE,over);
 			}
 			else {
-				gameOver.showMessageDialog(null, ("You Win\nScore"+score+"\nWave"+currentLevel));
+				gameOver.showMessageDialog(null, ("You Win!\nScore: "+score+"\nWave "+currentLevel));
 			}
 			System.exit(100);
 		}

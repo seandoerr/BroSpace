@@ -1,3 +1,9 @@
+/*PROGRAM:Projectile.Java
+ *PROGRAMMER:Group1
+ *DATE LAST MODIFIED:IP
+ *DESCRIPTION:The purpose of this class is to create the firing system that the player will use
+ *to hit the enemies.
+ */
 package MainPackage;
 
 import java.awt.Image;
@@ -7,9 +13,15 @@ import javax.swing.ImageIcon;
 
 public class Projectile 
 {
+	
 	int x, y;
 	Image projectile;
 	boolean visible;
+	
+	/*DESCRIPTION:Constructor
+	 *PRECONDITION:NA
+	 *POSTCONDITION:Initializes the instances
+	 */
 	public Projectile(int x, int y) 
 	{
 		ImageIcon newProjectile = new ImageIcon("fireball2.png ");
@@ -19,7 +31,10 @@ public class Projectile
 		visible = true;
 	}
 	
-	// x+size y+size/2
+	/*DESCRIPTION:Moves the location of the projectile to the right
+	 *PRECONDITION:NA
+	 *POSTCONDITION:The x location is adjusted to the right by a value of 3
+	 */
 	public void move() 
 	{
 		x += 3;
@@ -28,7 +43,17 @@ public class Projectile
 			visible = false;
 		}
 	}
-
+	
+	/*DESCRIPTION:Returns a Rectangle object used for hit detection 
+	 *PRECONDITION:NA
+	 *POSTCONDITION:Creates a Rectangle object based on the Projectile size and the location, then returns to the user
+	 */
+	public Rectangle getBounds() {
+		return new Rectangle(x-10, y-10, 10, 10);
+	}
+	
+	/*******************GETTERS AND SETTERS*******************/
+	
 	public int getX() 
 	{
 		return x;
@@ -59,9 +84,6 @@ public class Projectile
 		this.projectile = projectile;
 	}
 	
-	public Rectangle getBounds() {
-		return new Rectangle(x-10, y-10, 10, 10);
-	}
 
 	public boolean isVisible() 
 	{

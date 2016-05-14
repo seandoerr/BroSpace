@@ -1,3 +1,9 @@
+/*PROGRAM:Enemies.java
+ *PROGRAMMER:Group1
+ *DATE LAST MODIFIED:IP
+ *DESCRIPTION:The purpose of this program is to provide the Enemies the Player must hit
+ *in order to further the game.
+ */
 package MainPackage;
 
 import java.awt.Image;
@@ -25,6 +31,13 @@ public class Enemies { // 600 width 400 height
 
 	Rectangle border;
 
+	
+	/*DESCRIPTION:constructor
+	 *PRECONDITION:int @param should be from 0-4
+	 *POSTCONDITION:Initializes the class instances and places the Enemy at a location dependent on 
+	 *	the int value @param
+	 * 
+	 */
 	public Enemies(int locationStart) {
 
 		if (locationStart > 4 || locationStart < 0) {
@@ -48,11 +61,29 @@ public class Enemies { // 600 width 400 height
 
 	// fires the enemy to the left of the screen from the right
 
+	
+	/*DESCRIPTION:moves the enemy to the left of the screen from the right
+	 *PRECONDITION:NA
+	 *POSTCONDITION:Changes the x value by the value of ENEMY_VELOCITY
+	 * 
+	 */
 	public void fire() {
 
 		x += ENEMY_VELOCITY;
 
 	}
+	
+	/*DESCRIPTION:Returns a Rectangle that will be used for hit detection
+	 *PRECONDITION:NA
+	 *POSTCONDITION:Rectangle is returned dependent on the size and location of Enemies object
+	 * 
+	 */
+	public Rectangle getBounds() {
+		return new Rectangle(x-10, y-15, 25, 25);
+	}
+	
+	
+	/***************GETTERS AND SETTERS***************/
 
 	public int getX() {
 
@@ -100,10 +131,6 @@ public class Enemies { // 600 width 400 height
 
 		this.img = img;
 
-	}
-	
-	public Rectangle getBounds() {
-		return new Rectangle(x-10, y-15, 25, 25);
 	}
 	
 	public boolean getAlive() {

@@ -1,3 +1,9 @@
+/*PROGRAM:
+ *PROGRAMMER:
+ *DATE LAST MODIFIED:
+ *DESCRIPTION:
+ * 
+ */
 package MainPackage;
 
 import java.awt.Color;

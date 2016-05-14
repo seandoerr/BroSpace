@@ -1,3 +1,10 @@
+/*PROGRAM:Window.java
+ *PROGRAMMER:Group1
+ *DATE LAST MODIFIED:IP
+ *DESCRIPTION:The purpose of the program is to create JFrame Component that will contain the 
+ *game.
+ * 
+ */
 package MainPackage;
 
 import javax.swing.JFrame;
@@ -7,6 +14,11 @@ import javax.swing.JFrame;
 		private final int WINDOW_WIDTH = 637;
 		private final int WINDOW_HEIGHT = 455;
 
+		/*DESCRIPTION:Constructor 
+		 *PRECONDITION:NA
+		 *POSTCONDITION:Sets the JFrame and adds the game panel 
+		 * 
+		 */
 		public Window () 
 		{
 			JFrame frame = new JFrame();

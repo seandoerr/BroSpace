@@ -1,5 +1,7 @@
 package MainPackage;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -14,6 +16,7 @@ import java.util.Queue;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -21,7 +24,7 @@ public class Game extends JPanel implements ActionListener
 {
 	Queue<Integer> levelSize;
 	
-	final int LAST_LEVEL = 5;
+	final int LAST_LEVEL = 10;
 	
 	Player person;
 	
@@ -51,6 +54,11 @@ public class Game extends JPanel implements ActionListener
 		Random ran = new Random();
 		enemy = new Enemies(2);
 		levelSize = new LinkedList<Integer>();
+		
+		
+		//JOptionPane, set size, create background ( potentially make button the size of the optionPane and change the background of the background)
+//		JOptionPane gameOver = new JOptionPane("Game Over");
+//		gameOver.showMessageDialog(null, "You Lose");
 		
 		
 		//current level
@@ -114,7 +122,7 @@ public class Game extends JPanel implements ActionListener
 		for(int i = 0; i < projectiles.size(); i++)
 		{
 			Projectile p = (Projectile) projectiles.get(i);
-			if(p.isVisible() == true)
+			if(p.isVisible() == true&&!person.getDed())
 			{
 				p.move();
 			}
@@ -133,17 +141,13 @@ public class Game extends JPanel implements ActionListener
 		
 		Graphics2D g2d = (Graphics2D) g;
 		
-		hitDetection();
-		
-		
-		
 		g2d.drawImage(img,0, 0, null);
+		
 		
 		
 		if(!person.getDed()) {
 			g2d.drawImage(person.getImage(), person.getX(), person.getY() ,null);
 		}
-		
 		
 		
 		ArrayList<Projectile> projectiles = Player.getProjectiles();
@@ -156,10 +160,18 @@ public class Game extends JPanel implements ActionListener
 		
 		if(iterator==0) {
 			currentSize = levelSize.poll();//this will initialize the size of the wave
+			
+			
 			System.out.println(currentSize);
 		}
 		
 		iterator++;
+		
+		if(iterator < 100) {
+			g.setColor(Color.RED);
+			g.setFont(new Font("Lucida Sans Typewriter",20,20));
+			g.drawString("WAVE "+ (currentLevel+1), 250, 200);
+		}
 		
 		if( iterator > 100) {	
 			level.get(foe).fire();
@@ -210,13 +222,21 @@ public class Game extends JPanel implements ActionListener
 			currentLevel++;
 			
 			System.out.println("_____________________END OF LEVEL "+ currentLevel +"_____________________");
-			if(currentLevel==LAST_LEVEL) {//checks to see if the last level
+			if(currentLevel==LAST_LEVEL||person.getDed()) {//checks to see if the last level
 				endGame=true;
 			}
 		}
 		
 		//exits the game at the last wave
 		if(endGame) {
+			time.stop();
+			JOptionPane gameOver = new JOptionPane("Game Over");
+			if(person.getDed()) {
+				gameOver.showMessageDialog(null, ("You Lose\nScore"+score+"\nWave"+currentLevel));
+			}
+			else {
+				gameOver.showMessageDialog(null, ("You Win\nScore"+score+"\nWave"+currentLevel));
+			}
 			System.exit(100);
 		}
 		
@@ -229,7 +249,7 @@ public class Game extends JPanel implements ActionListener
 	
 	public void hitDetection() {
 		Rectangle aEnemy;
-		ArrayList projectiles = Player.getProjectiles();
+		ArrayList<Projectile> projectiles = Player.getProjectiles();
 		Rectangle personBounds = person.getBounds();
 		
 		for(int i = 0; i < projectiles.size(); i++)

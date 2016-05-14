@@ -251,7 +251,7 @@ public class Game extends JPanel implements ActionListener
 				gameOver.showMessageDialog(null, ("You Lose!\nScore: "+score+"\nWave "+currentLevel),"", JOptionPane.INFORMATION_MESSAGE,over);
 			}
 			else {
-				gameOver.showMessageDialog(null, ("You Win!\nScore: "+score+"\nWave "+currentLevel));
+				gameOver.showMessageDialog(null, ("You Win!\nScore: "+score+"\nWave "+currentLevel),"", JOptionPane.INFORMATION_MESSAGE,over);
 			}
 			System.exit(100);
 		}

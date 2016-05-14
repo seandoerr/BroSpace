@@ -272,11 +272,13 @@ public class Game extends JPanel implements ActionListener
 		
 		//checks to see the enemy intersects with person
 		for ( int x = 0 ;x< level.size(); x++) {
-			Rectangle ship = level.get(x).getBounds(); 
-			if(ship.intersects(personBounds)&&level.get(x).getAlive()) {
+			Enemies oneOfEm = level.get(x);
+			Rectangle ship = oneOfEm.getBounds(); 
+			if((ship.intersects(personBounds)||oneOfEm.getX()<0)&&oneOfEm.getAlive()) {
 				System.out.println("DED");
 				person.setDed(true);
 			}
+			
 			
 		}
 		

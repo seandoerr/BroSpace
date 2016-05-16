@@ -1,6 +1,6 @@
 /*PROGRAM:Window.java
  *PROGRAMMER:Group1
- *DATE LAST MODIFIED:IP
+ *DATE LAST MODIFIED:5-16-16
  *DESCRIPTION:The purpose of the program is to create JFrame Component that will contain the 
  *game.
  * 

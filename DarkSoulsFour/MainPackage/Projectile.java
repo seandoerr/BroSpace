@@ -1,6 +1,6 @@
 /*PROGRAM:Projectile.Java
  *PROGRAMMER:Group1
- *DATE LAST MODIFIED:IP
+ *DATE LAST MODIFIED:5-16-16
  *DESCRIPTION:The purpose of this class is to create the firing system that the player will use
  *to hit the enemies.
  */

@@ -1,6 +1,6 @@
 /*PROGRAM:Player.java
  *PROGRAMMER:Group1
- *DATE LAST MODIFIED:IP
+ *DATE LAST MODIFIED:5-16-16
  *DESCRIPTION:The purpose of this program is to create the playable character that will be used in the game.
  *This class will be used to monitor the players location in the level and check for collisions. The user
  *will be able to move the character using the arrow keys

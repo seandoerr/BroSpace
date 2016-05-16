@@ -1,6 +1,6 @@
 /*PROGRAM:Enemies.java
  *PROGRAMMER:Group1
- *DATE LAST MODIFIED:IP
+ *DATE LAST MODIFIED:5-16-16
  *DESCRIPTION:The purpose of this program is to provide the Enemies the Player must hit
  *in order to further the game.
  */

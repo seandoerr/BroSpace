@@ -1,8 +1,8 @@
-/*PROGRAM:
- *PROGRAMMER:
- *DATE LAST MODIFIED:
- *DESCRIPTION:
- * 
+/*PROGRAM:Game.java
+ *PROGRAMMER:Group1
+ *DATE LAST MODIFIED:5-16-16
+ *DESCRIPTION:The purpose of this class is to run the game loop on a JPanel:allowing a to player move, shoot projectiles,
+ *allow enemies to come in waves, and provide a means of hit detection. 
  */
 package MainPackage;
 
@@ -57,6 +57,12 @@ public class Game extends JPanel implements ActionListener
 	
 	ImageIcon play = new ImageIcon("title.png");
 	ImageIcon over = new ImageIcon("gameOver2.png");
+	
+	/*DESCIRPTION:constructor that initializes instances of class
+	 * PRECONDITION:NA
+	 * POSTCONDITION:The game is initialized and the timer is started
+	 * 
+	 */
 		
 	public Game() 
 	{
@@ -120,12 +126,16 @@ public class Game extends JPanel implements ActionListener
 		time.start();
 		ImageIcon fire = new ImageIcon("fireball2.png");
 		img2 = fire.getImage();
-		 iterator  = 0;
-		 b = 0;
-		 foe = 0;
+		iterator  = 0;
+		b = 0;
+		foe = 0;
 		
 	}
 	
+	/*DESCIRPTION:creates a method to handle the action events from the timer 
+	 * PRECONDITION:timer must be started
+	 * POSTCONDITION:the game is constantly updated each 5 msecs and repainted onto the JPanel 
+	 */
 	public void actionPerformed(ActionEvent e) 
 	{
 		hitDetection();
@@ -147,6 +157,11 @@ public class Game extends JPanel implements ActionListener
 		repaint();
 	}
 	
+	/*DESCIRPTION:Draws the Player , Enemies, and projectiles on the screen. 
+	 *PRECONDITION:NA
+	 *POSTCONDITION:objects are printed on the jPanel which is continually updated based upon each 
+	 *their respective locations and the user input.
+	 */
 	public void paint(Graphics g)
 	{
 		super.paint(g);
@@ -174,7 +189,7 @@ public class Game extends JPanel implements ActionListener
 			currentSize = levelSize.poll();//this will initialize the size of the wave
 			
 			
-			System.out.println(currentSize);
+			System.out.println("Wave Size: "+currentSize);
 		}
 		
 		iterator++;
@@ -185,6 +200,7 @@ public class Game extends JPanel implements ActionListener
 			g.drawString("WAVE "+ (currentLevel+1), 250, 200);
 		}
 		
+		//starts each of the enemies at different times
 		if( iterator > 100) {	
 			level.get(foe).fire();
 		}
@@ -263,6 +279,11 @@ public class Game extends JPanel implements ActionListener
 		}	
 	}
 	
+	/*DESCIRPTION: This method will checks projectiles, enemies, and the player object to see if their locations intersect.
+	 * PRECONDITION:NA
+	 * POSTCONDITION:Depending if any of the objects intersect, this method will update their visibility and determine if the game 
+	 * end.
+	 */
 	public void hitDetection() {
 		Rectangle aEnemy;
 		ArrayList<Projectile> projectiles = Player.getProjectiles();
@@ -270,7 +291,6 @@ public class Game extends JPanel implements ActionListener
 		
 		for(int i = 0; i < projectiles.size(); i++)
 		{
-			System.out.println("checking");
 			Projectile p = (Projectile) projectiles.get(i);
 			Rectangle a = p.getBounds();
 			
@@ -279,7 +299,6 @@ public class Game extends JPanel implements ActionListener
 				aEnemy = level.get(x).getBounds();
 				if(a.intersects(aEnemy)&& level.get(x).getAlive()) {
 					score++;
-					System.out.println("got em");
 					level.get(x).setAlive(false);
 					p.setVisible(false);				
 				}
@@ -291,11 +310,8 @@ public class Game extends JPanel implements ActionListener
 			Enemies oneOfEm = level.get(x);
 			Rectangle ship = oneOfEm.getBounds(); 
 			if((ship.intersects(personBounds)||oneOfEm.getX()<0)&&oneOfEm.getAlive()) {
-				System.out.println("DED");
 				person.setDed(true);
 			}
-			
-			
 		}
 		
 	}
